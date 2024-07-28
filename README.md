@@ -10,9 +10,9 @@ var res = await uploader.uploadImageUrl(
 );
 ```
 
-`imageUrl`: Direct public url
-`name`: Name of file
-`expiration`: Image expiry time in seconds
+- `imageUrl`: Direct public url
+- `name`: Name of file
+- `expiration`: Image expiry time in seconds
 
 ### Upload via File
 
@@ -24,9 +24,9 @@ var res = await uploader.uploadImageFile(
 );
 ```
 
-`imageFile`: Local file path
-`name`: Name of file
-`expiration`: Image expiry time in seconds
+- `imageFile`: Local file path
+- `name`: Name of file
+- `expiration`: Image expiry time in seconds
 
 ### Upload via Base64
 
@@ -38,9 +38,9 @@ var res = await uploader.uploadImageBase64(
 );
 ```
 
-`base64Image`: Base64 encoded image string
-`name`: Name of file
-`expiration`: Image expiry time in seconds
+- `base64Image`: Base64 encoded image string
+- `name`: Name of file
+- `expiration`: Image expiry time in seconds
 
 ### Getter
 
