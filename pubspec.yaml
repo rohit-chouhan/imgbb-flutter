@@ -1,0 +1,29 @@
+name: imgbb
+description: "ImgBB Client to upload images from url, local and base64."
+version: 0.0.1-beta
+homepage: https://github.com/rohit-chouhan/imgbb-flutter
+
+environment:
+  sdk: ">=3.4.3 <4.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+screenshots:
+  - description: "© imgbb.com"
+    path: imgbb.png
+
+topics:
+  - imgbb
+  - image-upload
+  - ibb
+  - photo-upload
+  - cloud-image
