@@ -6,20 +6,20 @@ import 'package:http/http.dart' as http;
 import 'package:imgbb/model/imgbb_response.dart';
 
 class Imgbb {
-  final String apiKey;
-  String baseUrl = 'https://api.imgbb.com/1/upload';
-  String errorMessage = '';
-  bool isSuccess = false;
+  final String _apiKey;
+  final String _baseUrl = 'https://api.imgbb.com/1/upload';
+  String _errorMessage = '';
+  bool _isSuccess = false;
 
-  Imgbb(this.apiKey);
+  Imgbb(this._apiKey);
 
   Future<ImgbbResponse?> uploadImageUrl(
       {required String imageUrl, String? name, int? expiration}) async {
     try {
       final response = await http.post(
-        Uri.parse(baseUrl),
+        Uri.parse(_baseUrl),
         body: {
-          'key': apiKey,
+          'key': _apiKey,
           'image': imageUrl,
           if (name != null) 'name': name,
           if (expiration != null) 'expiration': expiration.toString(),
@@ -34,8 +34,8 @@ class Imgbb {
   Future<ImgbbResponse?> uploadImageFile(
       {required File imageFile, String? name, int? expiration}) async {
     try {
-      final uri = Uri.parse(baseUrl).replace(queryParameters: {
-        'key': apiKey,
+      final uri = Uri.parse(_baseUrl).replace(queryParameters: {
+        'key': _apiKey,
         if (expiration != null) 'expiration': expiration.toString(),
       });
       final request = http.MultipartRequest('POST', uri);
@@ -58,9 +58,9 @@ class Imgbb {
       {required String base64Image, String? name, int? expiration}) async {
     try {
       final response = await http.post(
-        Uri.parse(baseUrl),
+        Uri.parse(_baseUrl),
         body: {
-          'key': apiKey,
+          'key': _apiKey,
           'image': base64Image,
           if (name != null) 'name': name,
           if (expiration != null) 'expiration': expiration.toString(),
@@ -75,18 +75,18 @@ class Imgbb {
   Future<ImgbbResponse?> _handleResponse(http.Response response) async {
     final jsonResponse = json.decode(response.body);
     if (response.statusCode == 200) {
-      isSuccess = true;
+      _isSuccess = true;
       return ImgbbResponse.fromJson(jsonResponse);
     } else {
-      isSuccess = false;
-      errorMessage = jsonResponse['error']['message'];
+      _isSuccess = false;
+      _errorMessage = jsonResponse['error']['message'];
     }
     return null;
   }
 
   /// Get Error Message if any
-  String getErrorMessage() => errorMessage;
+  String getErrorMessage() => _errorMessage;
 
   /// Check if the request was successful
-  bool isSuccessful() => isSuccess;
+  bool isSuccessful() => _isSuccess;
 }
